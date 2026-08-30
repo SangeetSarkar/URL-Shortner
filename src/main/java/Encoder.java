@@ -1,50 +1,33 @@
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Encoder {
-    private final String  BASE62_ALPHABET = "01123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final BigInteger  BASE = BigInteger.valueOf(62);
+    private final String  BASE62_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private List<Integer> converttoarray(String strs){
-        List<Integer> ls = new ArrayList<Integer>();
-        for(int i=0;i<strs.length();i++){
-            if(strs.charAt(i)-'0'>=0&& strs.charAt(i)-'0'<=9){
-                ls.add(strs.charAt(i)-'0');
-            }
-            else if(strs.charAt(i)-'a'>=0&& strs.charAt(i)-'a'<26){
-                ls.add((int)strs.charAt(i));
-            }
-            else{
-                ls.add(strs.charAt(i)-'A');
-            }
-        }
-        return ls;
-    }
-
-    public void encodewrapper(String strs){
-
-        byte[] bytes = strs.getBytes(StandardCharsets.UTF_8);
-
-        BigInteger number = new BigInteger(1,bytes);
-
+    public void myencoder(int num){
         StringBuilder sb = new StringBuilder();
-
-        while (number.compareTo(BigInteger.ZERO) > 0) {
-            BigInteger[] divmod = number.divideAndRemainder(BASE);
-            int remainder = divmod[1].intValue();
-            sb.append(BASE62_ALPHABET.charAt(remainder));
-            number = divmod[0];
+        while(num!=0){
+            sb.insert(0,BASE62_ALPHABET.charAt(num%62));
+            num/=62;
         }
-
-        System.out.println(sb.reverse().toString());
+        System.out.println(sb);
     }
 
-    private void encodeString(List<Integer> ls){
-        for(int i=0;i<ls.size();i++){
-
+    public void mydecoder(String strs){
+        int places=1;
+        int decodedString=0;
+        for(int i=strs.length()-1;i>=0;i--){
+            decodedString+=places*BASE62_ALPHABET.indexOf(strs.charAt(i));
+            places*=62;
         }
+        System.out.println("Decoded String: "+decodedString);
+    }
+
+    void myprint(byte[] bytes){
+        for(int i =0;i<bytes.length;i++){
+            System.out.print(bytes[i]+"/");
+        }
+    }
+
+    public void main(){
+        myencoder(12345);
+        mydecoder("3d7");
     }
 }
