@@ -1,7 +1,16 @@
 public class Main {
     public static void main(String[] args){
+        int strs =12345;
+
         Encoder en = new Encoder();
 
-        /*en.encodewrapper("1d5"); //1 3 4 3 4 17 5*/
+        final String encodedString = en.encode(strs);
+
+        Decoder de = new Decoder();
+
+        final int decodedString = de.decode(encodedString);
+        System.out.println("Original String: "+strs);
+        System.out.println("Encoded-String: "+encodedString);
+        System.out.println("Decoded-String: "+decodedString);
     }
 }
