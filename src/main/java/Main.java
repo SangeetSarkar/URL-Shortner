@@ -1,22 +1,21 @@
 public class Main {
     public static void main(String[] args){
-        int strs = 123;
+
+        DbConnection conn = new DbConnection();
+        conn.connectDB();
+
+        DataManupulation dm = new DataManupulation();
+
+        int id = dm.pushData("https://us.com");
+
+        /*dm.pushData(args[0]);*/
 
         Encoder en = new Encoder();
-        final String encodedString;
-        try {
-            encodedString = en.encode(strs);
-        }catch (IllegalArgumentException e){
-            System.err.println("Entered value is not a valid id");
-            return;
-        }
-
         Decoder de = new Decoder();
 
-        final int decodedString = de.decode(encodedString);
+        System.out.println("Original: "+id);
+        System.out.println("Encoded: "+en.encode(4000+id));
+        System.out.println("Decoded: "+de.decode(en.encode(4000+id)));
 
-        System.out.println("Original String: "+strs);
-        System.out.println("Encoded-String: "+encodedString);
-        System.out.println("Decoded-String: "+decodedString);
     }
 }
