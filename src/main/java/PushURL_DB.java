@@ -1,14 +1,13 @@
 import java.sql.*;
-import io.github.cdimascio.dotenv.Dotenv;
-public class DataManupulation {
-    private static final String INSERT_USERS_SQL = "INSERT INTO hashstorage " + "(url) VALUES " + "(?) RETURNING id;";
 
-    Dotenv dotenv = Dotenv.load();
+public class PushURL_DB {
+    private static final String INSERT_USERS_SQL = "INSERT INTO hashstorage (url) VALUES " + "(?) RETURNING id;";
 
     public int pushData(final String inputurl){
 
-        try(Connection conn = DriverManager.getConnection(dotenv.get("DB_URL"),dotenv.get("DB_USER"),dotenv.get("DB_PASSWORD"));
-                PreparedStatement preparedStatement = conn.prepareStatement(INSERT_USERS_SQL)
+        try(Connection conn = DB.connect();
+                PreparedStatement preparedStatement
+                        = conn.prepareStatement(INSERT_USERS_SQL)
         ){
             preparedStatement.setString(1,inputurl);
 

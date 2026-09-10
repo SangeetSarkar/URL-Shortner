@@ -4,10 +4,10 @@ import java.util.Properties;
 
 public class DbConnection {
     void connectDB(){
-        final String url = "jdbc:postgresql://65.0.170.126:5432/urlshortner";
+        final String url = DatabaseConfig.getDbUrl();
         final Properties props = new Properties();
-        props.setProperty("user", "urlshortner");
-        props.setProperty("password","root");
+        props.setProperty("user", DatabaseConfig.getDbUsername());
+        props.setProperty("password",DatabaseConfig.getDbPassword());
 
         try (Connection conn = DriverManager.getConnection(url, props)) {
             System.out.println("Connected to DB");
