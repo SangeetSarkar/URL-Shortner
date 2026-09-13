@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class PushURL_DB {
-    private static final String INSERT_USERS_SQL = "INSERT INTO hashstorage (url) VALUES " + "(?) RETURNING id;";
+    private static final String INSERT_USERS_SQL = "INSERT INTO hashstorage (url) VALUES (?) RETURNING id;";
 
     public int pushData(final String inputurl){
 
@@ -14,7 +14,7 @@ public class PushURL_DB {
             try(ResultSet rs = preparedStatement.executeQuery()){
                 if(rs.next()){
                     int generatedId = rs.getInt("id");
-                    System.out.println("Inserted record with id:"+generatedId);
+                    System.out.println("Inserted record with id: "+generatedId);
                     return generatedId;
                 }
             }
