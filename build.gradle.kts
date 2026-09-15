@@ -19,7 +19,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.postgresql:postgresql:42.7.13")
-    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+    implementation("io.github.cdimascio:dotenv-java:3.2.0")
+    implementation("redis.clients:jedis:7.2.0")
+    implementation("io.lettuce:lettuce-core:7.7.0.RELEASE")
 }
 
 tasks.test {

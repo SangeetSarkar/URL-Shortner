@@ -11,7 +11,7 @@ public class Base62_encoder {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             System.out.println(e.getMessage());
-            return "";
+            return null;
         }
         byte[] byte_array = digest.digest(url.getBytes(StandardCharsets.UTF_8));
 
